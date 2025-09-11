@@ -1,0 +1,21 @@
+[package]
+name = "advent-of-code-2017"
+version = "0.1.0"
+edition = "2021"
+
+# Optional: description or author
+# description = "Advent of Code solutions in Rust"
+# authors = ["Julian <you@example.com>"]
+
+[dependencies]
+# Handy for CLI argument parsing
+clap = { version = "4.3", features = ["derive"] }
+
+# For easier error handling
+anyhow = "1.0"
+
+# Optional: for more convenient parsing of inputs, e.g., itertools
+itertools = "0.10"
+
+# Optional: benchmarking helpers if you want
+criterion = { version = "0.4", optional = true }

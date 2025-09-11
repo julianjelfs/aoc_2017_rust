@@ -5,6 +5,7 @@ pub fn run(input: &str) {
 
 fn part1(input: &str) -> i32 {
     // your solution here
+    let _digits: Vec<u32>  = input.chars().map(|c| c.to_digit(10).expect("not a digit")).collect();
     println!("This is a the input: {input}");
     0
 }

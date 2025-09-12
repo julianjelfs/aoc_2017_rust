@@ -5,11 +5,19 @@ pub fn run(input: &str) {
 
 fn solve<F>(input: &str, index_finder: F) -> u32
 where
-    F: Fn(usize, usize) -> usize
+    F: Fn(usize, usize) -> usize,
 {
-    let digits: Vec<u32>  = input.chars().map(|c| c.to_digit(10).expect("not a digit")).collect();
+    let digits: Vec<u32> = input
+        .chars()
+        .map(|c| c.to_digit(10).expect("not a digit"))
+        .collect();
     let len = digits.len();
-    digits.iter().enumerate().filter(|(i, &d)| d == digits[index_finder(*i, len)]).map(|(_, d)| d).sum()
+    digits
+        .iter()
+        .enumerate()
+        .filter(|(i, &d)| d == digits[index_finder(*i, len)])
+        .map(|(_, d)| d)
+        .sum()
 }
 
 fn part1(input: &str) -> u32 {

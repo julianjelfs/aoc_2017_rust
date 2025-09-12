@@ -14,8 +14,8 @@ fn main() {
     let day: u32 = args[1].parse().expect("Day must be a number");
     let input_path = format!("inputs/day{:02}.txt", day);
 
-    let input = fs::read_to_string(&input_path)
-        .unwrap_or_else(|_| panic!("Failed to read {}", input_path));
+    let input =
+        fs::read_to_string(&input_path).unwrap_or_else(|_| panic!("Failed to read {}", input_path));
 
     match day {
         1 => days::day01::run(&input.trim()),

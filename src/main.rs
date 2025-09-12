@@ -18,7 +18,7 @@ fn main() {
         fs::read_to_string(&input_path).unwrap_or_else(|_| panic!("Failed to read {}", input_path));
 
     match day {
-        1 => days::day01::run(&input.trim()),
+        1 => days::day01::run(input.trim()),
         // 2 => days::day02::run(&input),
         // 3 => days::day03::run(&input),
         // keep adding as you go

@@ -1,9 +1,11 @@
 use std::collections::HashSet;
 
 pub fn run(input: &str) {
-    let (cycles, memory_bank) = part1(input);
-    println!("Day 06, Part 1: {}", cycles);
-    println!("Day 06, Part 2: {}", part2(memory_bank));
+    let memory_bank = get_memory_bank(input);
+    let (part1, memory_bank) = solve(memory_bank);
+    let (part2, _) = solve(memory_bank);
+    println!("Day 06, Part 1: {}", part1);
+    println!("Day 06, Part 2: {}", part2);
 }
 
 fn get_memory_bank(input: &str) -> Vec<u32> {
@@ -30,16 +32,16 @@ fn max(memory_bank: &[u32]) -> (usize, u32) {
 }
 
 fn balance(memory_bank: &mut [u32]) {
+    let len = memory_bank.len();
     let (index, max) = max(memory_bank);
     memory_bank[index] = 0;
     for i in 0..max as usize {
-        memory_bank[(index + i + 1) % 16] += 1;
+        memory_bank[(index + i + 1) % len] += 1;
     }
 }
 
-fn part1(input: &str) -> (usize, Vec<u32>) {
+fn solve(mut memory_bank: Vec<u32>) -> (usize, Vec<u32>) {
     let mut arrangements: HashSet<Vec<u32>> = HashSet::new();
-    let mut memory_bank = get_memory_bank(input);
     let mut cycles = 0;
     arrangements.insert(memory_bank.clone());
 
@@ -51,20 +53,4 @@ fn part1(input: &str) -> (usize, Vec<u32>) {
         }
     }
     (cycles, memory_bank)
-}
-
-fn part2(mut memory_bank: Vec<u32>) -> usize {
-    let mut arrangements: HashSet<Vec<u32>> = HashSet::new();
-    let mut cycles = 0;
-    arrangements.insert(memory_bank.clone());
-
-    loop {
-        balance(&mut memory_bank);
-        cycles += 1;
-        let clone = memory_bank.clone();
-        if !arrangements.insert(clone) {
-            break;
-        }
-    }
-    cycles
 }

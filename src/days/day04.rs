@@ -1,4 +1,4 @@
-use std::{collections::HashSet };
+use std::collections::HashSet;
 
 use itertools::Itertools;
 
@@ -12,7 +12,7 @@ fn contains_anagrams(words: &[&str]) -> bool {
     for &word in words {
         let sorted: String = word.chars().sorted_unstable().collect();
         if !s.insert(sorted) {
-            return true
+            return true;
         }
     }
     false
@@ -22,7 +22,7 @@ fn contains_duplicates(words: &[&str]) -> bool {
     let mut set = HashSet::new();
     for &word in words {
         if !set.insert(word) {
-            return true
+            return true;
         }
     }
     false
@@ -32,10 +32,13 @@ fn solve<F>(input: &str, check: F) -> usize
 where
     F: Fn(&[&str]) -> bool,
 {
-    input.lines().filter(|line| {
-        let words: Vec<&str> = line.split_whitespace().collect();
-        !check(&words)
-    }).count()
+    input
+        .lines()
+        .filter(|line| {
+            let words: Vec<&str> = line.split_whitespace().collect();
+            !check(&words)
+        })
+        .count()
 }
 
 fn part1(input: &str) -> usize {

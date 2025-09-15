@@ -4,7 +4,7 @@ pub fn run(input: &str) {
 }
 
 fn register_updater_one(val: &mut i32) {
-        *val += 1;
+    *val += 1;
 }
 
 fn register_updater_two(val: &mut i32) {
@@ -24,7 +24,8 @@ fn part2(input: &str) -> usize {
 }
 
 fn solve<F>(input: &str, register_updater: F) -> usize
-where F: Fn(&mut i32),
+where
+    F: Fn(&mut i32),
 {
     let mut jumps: usize = 0;
     let mut index: i32 = 0;

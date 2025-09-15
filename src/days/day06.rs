@@ -7,8 +7,7 @@ pub fn run(input: &str) {
 
 fn get_memory_bank(input: &str) -> Vec<u32> {
     if let Some(line) = input.lines().next() {
-        line
-            .split_whitespace()
+        line.split_whitespace()
             .filter_map(|w| w.parse().ok())
             .collect::<Vec<u32>>()
     } else {
@@ -16,24 +15,26 @@ fn get_memory_bank(input: &str) -> Vec<u32> {
     }
 }
 
-fn max(memory_bank: &Vec<u32>) -> (usize, u32) {
-    memory_bank.iter().enumerate().fold((0, 0), |(max_i, max_v), (i, &v)| {
-        if v > max_v {
-            (i, v)
-        } else {
-            (max_i, max_v)
-        }
-    })
+fn max(memory_bank: &[u32]) -> (usize, u32) {
+    memory_bank.iter().enumerate().fold(
+        (0, 0),
+        |(max_i, max_v), (i, &v)| {
+            if v > max_v {
+                (i, v)
+            } else {
+                (max_i, max_v)
+            }
+        },
+    )
 }
 
-fn balance(memory_bank: &mut Vec<u32>) {
+fn balance(memory_bank: &mut [u32]) {
     let (index, max) = max(memory_bank);
     memory_bank[index] = 0;
     for i in 0..max as usize {
         memory_bank[(index + i + 1) % 16] += 1;
     }
 }
-
 
 fn part1(input: &str) -> usize {
     let mut arrangements: HashSet<Vec<u32>> = HashSet::new();

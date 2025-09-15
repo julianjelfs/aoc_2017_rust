@@ -1,8 +1,9 @@
 use std::collections::HashSet;
 
 pub fn run(input: &str) {
-    println!("Day 06, Part 1: {}", part1(input));
-    println!("Day 06, Part 2: {}", part2(input));
+    let (cycles, memory_bank) = part1(input);
+    println!("Day 06, Part 1: {}", cycles);
+    println!("Day 06, Part 2: {}", part2(memory_bank));
 }
 
 fn get_memory_bank(input: &str) -> Vec<u32> {
@@ -36,7 +37,7 @@ fn balance(memory_bank: &mut [u32]) {
     }
 }
 
-fn part1(input: &str) -> usize {
+fn part1(input: &str) -> (usize, Vec<u32>) {
     let mut arrangements: HashSet<Vec<u32>> = HashSet::new();
     let mut memory_bank = get_memory_bank(input);
     let mut cycles = 0;
@@ -49,9 +50,21 @@ fn part1(input: &str) -> usize {
             break;
         }
     }
-    cycles
+    (cycles, memory_bank)
 }
 
-fn part2(_input: &str) -> usize {
-    0
+fn part2(mut memory_bank: Vec<u32>) -> usize {
+    let mut arrangements: HashSet<Vec<u32>> = HashSet::new();
+    let mut cycles = 0;
+    arrangements.insert(memory_bank.clone());
+
+    loop {
+        balance(&mut memory_bank);
+        cycles += 1;
+        let clone = memory_bank.clone();
+        if !arrangements.insert(clone) {
+            break;
+        }
+    }
+    cycles
 }

@@ -25,6 +25,7 @@ fn main() {
         4 => days::day04::run(input.trim()),
         5 => days::day05::run(input.trim()),
         6 => days::day06::run(input.trim()),
+        7 => days::day07::run(input.trim()),
         // keep adding as you go
         _ => eprintln!("Day {} not implemented yet", day),
     }
